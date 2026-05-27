@@ -1,6 +1,5 @@
 <?php include 'app/views/shares/header.php'; ?>
 <h1>Sửa danh mục</h1>
-
 <form method="POST" action="/NguyenVanAn/Category/update">
     <input type="hidden" name="id" value="<?php echo $category->id; ?>">
     <div class="form-group">
@@ -13,6 +12,5 @@
     </div>
     <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
 </form>
-
 <a href="/NguyenVanAn/Category/list" class="btn btn-secondary mt-2">Quay lại danh sách danh mục</a>
 <?php include 'app/views/shares/footer.php'; ?>

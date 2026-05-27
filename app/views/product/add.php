@@ -9,7 +9,7 @@
     </ul>
 </div>
 <?php endif; ?>
-<form method="POST" action="/NguyenVanAn/Product/save" enctype="multipart/form-data" onsubmit="return validateForm();">
+<form method="POST" action="/NguyenVanAn/Product/save" enctype="multipart/form-data">
     <div class="form-group">
         <label for="name">Tên sản phẩm: </label>
         <input type="text" id="name" name="name" class="form-control" required>
@@ -29,7 +29,6 @@
             <option value="<?php echo $category->id; ?>"><?php echo htmlspecialchars($category->name, ENT_QUOTES, 'UTF-8'); ?></option>
             <?php endforeach; ?>
         </select>
-        <small class="form-text text-muted"><a href="/NguyenVanAn/Category/add">Chưa có danh mục? Thêm tại đây.</a></small>
     </div>
     <div class="form-group">
         <label for="image">Hình ảnh: </label>
@@ -37,5 +36,5 @@
     </div>
     <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
 </form>
-<a href="/NguyenVanAn/Product/list" class="btn btn-secondary mt-2">Quay lại danh sách sản phẩm</a>
+<a href="/NguyenVanAn/Product/index" class="btn btn-secondary mt-2">Quay lại danh sách sản phẩm</a>
 <?php include 'app/views/shares/footer.php'; ?>

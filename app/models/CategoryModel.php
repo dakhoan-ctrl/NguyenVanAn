@@ -53,7 +53,6 @@ class CategoryModel {
         $query = "DELETE FROM " . $this->table_name . " WHERE id=:id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);
-        
         try {
             return $stmt->execute();
         } catch (PDOException $e) {

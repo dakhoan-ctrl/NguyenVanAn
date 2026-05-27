@@ -13,8 +13,7 @@ class ProductModel {
                   LEFT JOIN category c ON p.category_id = c.id";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
-        return $result;
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
     public function getProductById($id) {
@@ -22,8 +21,7 @@ class ProductModel {
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_OBJ);
-        return $result;
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 
     public function addProduct($name, $description, $price, $category_id, $image) {
@@ -50,8 +48,7 @@ class ProductModel {
         $stmt->bindParam(':category_id', $category_id);
         $stmt->bindParam(':image', $image);
 
-        if ($stmt->execute()) { return true; }
-        return false;
+        return $stmt->execute();
     }
 
     public function updateProduct($id, $name, $description, $price, $category_id, $image) {
@@ -73,16 +70,14 @@ class ProductModel {
         $stmt->bindParam(':category_id', $category_id);
         $stmt->bindParam(':image', $image);
 
-        if ($stmt->execute()) { return true; }
-        return false;
+        return $stmt->execute();
     }
 
     public function deleteProduct($id) {
         $query = "DELETE FROM " . $this->table_name . " WHERE id=:id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);
-        if ($stmt->execute()) { return true; }
-        return false;
+        return $stmt->execute();
     }
 }
 ?>

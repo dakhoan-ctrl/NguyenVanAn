@@ -26,6 +26,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/NguyenVanAn/Category/add">Thêm danh mục</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/NguyenVanAn/Product/cart">Giỏ hàng</a>
+                </li>
             </ul>
         </div>
     </nav>

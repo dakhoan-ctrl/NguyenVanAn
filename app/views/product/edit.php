@@ -1,15 +1,6 @@
 <?php include 'app/views/shares/header.php'; ?>
 <h1>Sửa sản phẩm</h1>
-<?php if (!empty($errors)): ?>
-<div class="alert alert-danger">
-    <ul>
-        <?php foreach ($errors as $error): ?>
-        <li><?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?></li>
-        <?php endforeach; ?>
-    </ul>
-</div>
-<?php endif; ?>
-<form method="POST" action="/NguyenVanAn/Product/update" enctype="multipart/form-data" onsubmit="return validateForm();">
+<form method="POST" action="/NguyenVanAn/Product/update" enctype="multipart/form-data">
     <input type="hidden" name="id" value="<?php echo $product->id; ?>">
     <div class="form-group">
         <label for="name">Tên sản phẩm: </label>
@@ -38,11 +29,10 @@
         <input type="file" id="image" name="image" class="form-control">
         <input type="hidden" name="existing_image" value="<?php echo $product->image; ?>">
         <?php if ($product->image): ?>
-            <br>
-            <img src="/NguyenVanAn/<?php echo $product->image; ?>" alt="Product Image" style="max-width: 100px;">
+            <img src="/NguyenVanAn/<?php echo $product->image; ?>" alt="Product Image" style="max-width: 100px;" class="mt-2">
         <?php endif; ?>
     </div>
     <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
 </form>
-<a href="/NguyenVanAn/Product/list" class="btn btn-secondary mt-2">Quay lại danh sách sản phẩm</a>
+<a href="/NguyenVanAn/Product/index" class="btn btn-secondary mt-2">Quay lại danh sách sản phẩm</a>
 <?php include 'app/views/shares/footer.php'; ?>

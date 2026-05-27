@@ -1,6 +1,5 @@
 <?php include 'app/views/shares/header.php'; ?>
 <h1>Thêm danh mục mới</h1>
-
 <form method="POST" action="/NguyenVanAn/Category/save">
     <div class="form-group">
         <label for="name">Tên danh mục: </label>
@@ -12,6 +11,5 @@
     </div>
     <button type="submit" class="btn btn-primary">Lưu danh mục</button>
 </form>
-
-<a href="/NguyenVanAn/Product/add" class="btn btn-secondary mt-2">Quay lại trang thêm sản phẩm</a>
+<a href="/NguyenVanAn/Category/list" class="btn btn-secondary mt-2">Quay lại danh sách danh mục</a>
 <?php include 'app/views/shares/footer.php'; ?>
