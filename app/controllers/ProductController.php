@@ -118,7 +118,6 @@ class ProductController {
         return $target_file;
     }
 
-    // --- CÁC PHƯƠNG THỨC MỚI BÀI 3 ---
     public function addToCart($id) {
         $product = $this->productModel->getProductById($id);
         if (!$product) {
@@ -146,15 +145,38 @@ class ProductController {
         include 'app/views/product/cart.php';
     }
 
+    public function updateCart() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['quantities'])) {
+            foreach ($_POST['quantities'] as $id => $quantity) {
+                $quantity = (int)$quantity;
+                if ($quantity <= 0) {
+                    unset($_SESSION['cart'][$id]);
+                } else {
+                    $_SESSION['cart'][$id]['quantity'] = $quantity;
+                }
+            }
+        }
+        header('Location: /NguyenVanAn/Product/cart');
+    }
+
+    // --- HÀM XÓA SẢN PHẨM KHỎI GIỎ HÀNG (MỚI CẬP NHẬT) ---
+    public function removeFromCart($id) {
+        if (isset($_SESSION['cart'][$id])) {
+            unset($_SESSION['cart'][$id]);
+        }
+        header('Location: /NguyenVanAn/Product/cart');
+    }
+
     public function checkout() {
         include 'app/views/product/checkout.php';
     }
 
     public function processCheckout() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $name = $_POST['name'];
-            $phone = $_POST['phone'];
-            $address = $_POST['address'];
+            $name = $_POST['name'] ?? '';
+            $phone = $_POST['phone'] ?? '';
+            $address = $_POST['address'] ?? '';
+            $payment_method = $_POST['payment_method'] ?? 'COD';
 
             if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
                 echo "Giỏ hàng trống.";
@@ -163,17 +185,16 @@ class ProductController {
 
             $this->db->beginTransaction();
             try {
-                // Lưu vào bảng orders
-                $query = "INSERT INTO orders (name, phone, address) VALUES (:name, :phone, :address)";
+                $query = "INSERT INTO orders (name, phone, address, payment_method) VALUES (:name, :phone, :address, :payment_method)";
                 $stmt = $this->db->prepare($query);
                 $stmt->bindParam(':name', $name);
                 $stmt->bindParam(':phone', $phone);
                 $stmt->bindParam(':address', $address);
+                $stmt->bindParam(':payment_method', $payment_method);
                 $stmt->execute();
                 
                 $order_id = $this->db->lastInsertId();
 
-                // Lưu chi tiết vào bảng order_details
                 $cart = $_SESSION['cart'];
                 foreach ($cart as $product_id => $item) {
                     $query = "INSERT INTO order_details (order_id, product_id, quantity, price) 
