@@ -29,7 +29,7 @@
                 <td class="align-middle"><?php echo htmlspecialchars($item['name'], ENT_QUOTES, 'UTF-8'); ?></td>
                 <td class="align-middle"><?php echo number_format($item['price'], 0, ',', '.'); ?> VND</td>
                 <td class="align-middle" style="width: 150px;">
-                    <input type="number" name="quantities[<?php echo $id; ?>]" value="<?php echo $item['quantity']; ?>" min="1" class="form-control text-center">
+                    <input type="number" name="quantities[<?php echo $id; ?>]" value="<?php echo $item['quantity']; ?>" min="1" class="form-control text-center" onchange="this.form.submit()">
                 </td>
                 <td class="align-middle fw-bold text-danger"><?php echo number_format($subTotal, 0, ',', '.'); ?> VND</td>
                 <td class="align-middle text-center">
@@ -39,16 +39,15 @@
             <?php endforeach; ?>
             <tr>
                 <td colspan="5" class="text-right font-weight-bold">Tổng cộng:</td>
-                <td class="font-weight-bold text-danger"><?php echo number_format($totalPrice, 0, ',', '.'); ?> VND</td>
+                <td class="font-weight-bold text-danger" style="font-size: 1.2rem;"><?php echo number_format($totalPrice, 0, ',', '.'); ?> VND</td>
             </tr>
         </tbody>
     </table>
     
     <div class="d-flex justify-content-between mt-3">
-        <a href="/NguyenVanAn/Product" class="btn btn-secondary">Tiếp tục mua sắm</a>
+        <a href="/NguyenVanAn/Product/index" class="btn btn-secondary">Tiếp tục mua sắm</a>
         <div>
-            <button type="submit" class="btn btn-info mr-2">Cập nhật giỏ hàng</button>
-            <a href="/NguyenVanAn/Product/checkout" class="btn btn-success">Tiến hành Thanh Toán</a>
+            <a href="/NguyenVanAn/Product/checkout" class="btn btn-success btn-lg">Tiến hành Thanh Toán</a>
         </div>
     </div>
 </form>

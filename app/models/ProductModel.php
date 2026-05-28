@@ -16,8 +16,12 @@ class ProductModel {
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    // ĐÃ CẬP NHẬT: JOIN với bảng category để lấy thêm trường category_name
     public function getProductById($id) {
-        $query = "SELECT * FROM " . $this->table_name . " WHERE id = :id";
+        $query = "SELECT p.*, c.name as category_name 
+                  FROM " . $this->table_name . " p 
+                  LEFT JOIN category c ON p.category_id = c.id 
+                  WHERE p.id = :id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
